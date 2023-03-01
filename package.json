@@ -5,11 +5,16 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build-watch": "vue-cli-service  --env.NODE_ENV=development build-watch --mode development"
   },
   "dependencies": {
     "core-js": "^3.8.3",
-    "vue": "^2.6.14"
+    "vue": "^2.6.14",
+    "@tensorflow/tfjs": "^4.1.0",
+    "buefy": "^0.9.22",
+    "onnxruntime-node": "^1.14.0",
+    "onnxruntime-web": "^1.14.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -19,12 +24,16 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "vue-cli-plugin-chrome-extension-cli": "~1.1.4",
     "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
-    "root": true,
+    "root": false,
     "env": {
-      "node": true
+      "es2020": true,
+      "browser": true,
+      "node": true,
+      "webextensions": true
     },
     "extends": [
       "plugin:vue/essential",
