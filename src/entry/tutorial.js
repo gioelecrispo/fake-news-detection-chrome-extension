@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import App from '../view/popup.vue';
+import App from '../view/tutorial.vue';
 import Buefy from "buefy";
 import 'buefy/dist/buefy.css';
 

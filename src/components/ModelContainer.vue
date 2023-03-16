@@ -84,6 +84,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="css" scoped>
 
 </style>

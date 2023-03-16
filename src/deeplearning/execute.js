@@ -1,4 +1,4 @@
-const BertTokenizer = require("./tokenizer");
+/*const BertTokenizer = require("./tokenizer2");
 const ort = require('onnxruntime-web');
 
 const Tensor = ort.Tensor;
@@ -58,4 +58,4 @@ async function execute(session, text) {
 }
 
 
-exports.execute = execute;
+exports.execute = execute;*/

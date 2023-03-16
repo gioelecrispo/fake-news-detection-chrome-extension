@@ -1,7 +1,33 @@
-export function openWelcomePage() {
-    // Acquire the welcome page URL
-    let url = chrome.runtime.getURL("popup.html");
+export function sendMessageToPopup(id, message) {
+    let views = chrome.extension.getViews({ type: "popup" });
+    if (views.length > 0) {
+        chrome.runtime.sendMessage({id: id, message: message});
+    } else {
+        console.log('Unable to send msg to POPUP, it is not open:', message);
+    }
+}
 
+export function  sendMessageToContent(id, message) {
+    chrome.tabs.query({ currentWindow: true, active: true }, (tabs) => {
+        const activeTab = tabs[0];
+        if (activeTab) {
+            console.log('Send msg to content:', message);
+            chrome.tabs.sendMessage(activeTab.id, {id: id, message: message});
+        } else {
+            console.log('Unable to send msg to CONTENT, no active tab:', message);
+        }
+    });
+}
+
+export function sendMessageToPopupAndContent(id, message) {
+    console.log('Send msg to popup & content -> id:', id, 'message', message);
+    sendMessageToPopup(id, message);
+    sendMessageToContent(id, message);
+}
+
+export function openNewTabPage(htmlPage) {
+    // Acquire the welcome page URL
+    let url = chrome.runtime.getURL(htmlPage);
     // Open the welcome page in a new tab .
     chrome.tabs.create({ url });
 }
@@ -12,7 +38,6 @@ export async function initializeContextMenus() {
         return;
     }
     await chrome.contextMenus.removeAll();
-    //const QUICK_OPEN_PREFIX = "quickopen__";
 
     chrome.contextMenus.create({
         id: "page",
@@ -27,16 +52,10 @@ export async function initializeContextMenus() {
     });
 
     chrome.contextMenus.onClicked.addListener((info, tab) => {
-        chrome.runtime.sendMessage({
+        chrome.tabs.sendMessage(tab.id, {
             id: "CONTEXT_MENU_CLICK",
             info,
             tab,
         });
-
-        /*if (info.menuItemId.startsWith(QUICK_OPEN_PREFIX)) {
-            chrome.tabs.create({
-                url: getPageUrl(info.menuItemId.replace(QUICK_OPEN_PREFIX, "")),
-            });
-        }*/
     });
 }

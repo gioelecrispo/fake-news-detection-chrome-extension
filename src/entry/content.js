@@ -1,40 +1,34 @@
-/*chrome.runtime.onMessage.addListener((msg, sender, callback) => {
-    console.log('Received msg in CONTENT!!!:', msg, sender, callback);
-    let text = "";
-    if (msg.id === "CONTEXT_MENU_CLICK") {
-        text = msg.info.selectionText;
-    }
-    chrome.runtime.sendMessage({id: "POPUP.requestPrediction", text: text});
-})*/
+import Vue from "vue";
+import shadow from 'vue-shadow-dom';
+import ContentView from "../view/content";
+import Buefy from "buefy";
 
-// Add bubble to the top of the page.
-var bubbleDOM = document.createElement('div');
-bubbleDOM.setAttribute('class', 'selection_bubble');
-document.body.appendChild(bubbleDOM);
-
-// Lets listen to mouseup DOM events.
-document.addEventListener('mouseup', function (e) {
-    console.log("AAAAAAAAAAAAA")
-    console.log(e)
-    var selection = window.getSelection().toString();
-
-    if (selection.length > 0) {
-        renderBubble(e.pageX, e.pageY-40, selection);
-    }
-}, false);
+Vue.use(shadow);
+Vue.use(Buefy, {
+    defaultIconPack: 'fas'
+});
+Vue.config.productionTip = false;
 
 
-// Close the bubble when we click on the screen.
-// eslint-disable-next-line no-unused-vars
-document.addEventListener('mousedown', function (e) {
-    bubbleDOM.style.visibility = 'hidden';
-}, false);
+let contentAppDOM = document.createElement('div');
+//document.body.insertBefore(contentAppDOM, document.body.firstChild);
+document.documentElement.appendChild(contentAppDOM);
 
-// Move that bubble to the appropriate location.
-// eslint-disable-next-line no-unused-vars
-function renderBubble(mouseX, mouseY, selection) {
-    bubbleDOM.innerHTML = selection; // "Check if it is a fake news";
-    bubbleDOM.style.top = mouseY + 'px';
-    bubbleDOM.style.left = mouseX + 'px';
-    bubbleDOM.style.visibility = 'visible';
+/*
+let shadowElement = document.createElement('div');
+shadowaw.attachShadow({mode: 'open'})
+shadowaw.shadowRoot.appendChild(contentAppDOM);
+document.body.appendChild(shadowaw);
+//mounted() { var shadow_css = new CSSStyleSheet; shadow_css.replaceSync(YOUR_CSS) this.$el.shadowRoot.adoptedStyleSheets = [ shadow_css ];
+let style = document.createElement("style");
+
+style.textContent = `
+.wrapper {
+  position: relative;
 }
+`*/
+
+new Vue({
+    el: contentAppDOM,
+    render: (h) => h(ContentView)
+});
