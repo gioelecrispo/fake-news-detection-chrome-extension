@@ -6,24 +6,10 @@
     "background": {
         "service_worker": "/background.js"
     },
-    "host_permissions": ["<all_urls>"],
     "permissions": [
         "activeTab",
         "contextMenus",
-        "declarativeNetRequest",
-        "desktopCapture",
-        "identity",
-        "identity.email",
-        "pageCapture",
-        "scripting",
-        "storage",
-        "system.cpu",
-        "system.display",
-        "system.memory",
-        "system.storage",
-        "tabCapture",
-        "tabs",
-        "webNavigation"
+        "storage"
     ],
     "action": {
         "default_icon": "logo.png",
@@ -41,7 +27,7 @@
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": [ "/content.js" ],
+            "js": [ "/contentSelection.js", "/contentPage.js" ],
             "css": ["/content.css"]
         }
     ],

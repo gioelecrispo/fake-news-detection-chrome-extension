@@ -1,10 +1,5 @@
 export function sendMessageToPopup(id, message) {
-    let views = chrome.extension.getViews({ type: "popup" });
-    if (views.length > 0) {
-        chrome.runtime.sendMessage({id: id, message: message});
-    } else {
-        console.log('Unable to send msg to POPUP, it is not open:', message);
-    }
+    chrome.runtime.sendMessage({id: id, message: message});
 }
 
 export function  sendMessageToContent(id, message) {
@@ -19,11 +14,6 @@ export function  sendMessageToContent(id, message) {
     });
 }
 
-export function sendMessageToPopupAndContent(id, message) {
-    console.log('Send msg to popup & content -> id:', id, 'message', message);
-    sendMessageToPopup(id, message);
-    sendMessageToContent(id, message);
-}
 
 export function openNewTabPage(htmlPage) {
     // Acquire the welcome page URL
@@ -45,11 +35,11 @@ export async function initializeContextMenus() {
         contexts: ["page", "frame"],
     });
 
-    chrome.contextMenus.create({
+    /*chrome.contextMenus.create({
         id: "text-selection",
         title: "Check if this text is a fake news",
         contexts: ["selection"],
-    });
+    });*/
 
     chrome.contextMenus.onClicked.addListener((info, tab) => {
         chrome.tabs.sendMessage(tab.id, {

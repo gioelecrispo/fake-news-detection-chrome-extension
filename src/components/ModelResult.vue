@@ -1,70 +1,55 @@
 <template>
-    <div class="card" :class="`has-background-${color}-light`"
-        :style="`border-left: 5px solid ${color};`">
-        <header class="card-header">
-            <p class="card-header-title">
-                {{ message }}
-            </p>
-            <button class="card-header-icon" aria-label="close">
-                <span class="icon">
-                    <i class="fa-solid fa-circle-xmark"></i>
-                </span>
-            </button>
-        </header>
-        <div class="card-content">
-            <div class="content">
-                {{ description }}
-                <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-                <br>
-                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                <b-progress class="mt-2"
-                            v-if="score !== undefined" show-value format="percent"
-                            size="is-small"
-                            :type="`is-${color}`" :value="80">
-                </b-progress>
-            </div>
+    <div>
+        <div v-if="card" class="fab-container">
+            <b-image class="is-16x16 fab-content" :src="require('@/assets/icons/logo-48x48.png')"></b-image>
         </div>
-        <!--<footer class="card-footer">
-            <a href="#" class="card-footer-item">Save</a>
-            <a href="#" class="card-footer-item">Edit</a>
-            <a href="#" class="card-footer-item">Delete</a>
-        </footer>-->
-    </div>
-    <!--<div class="result-container">
-        <b-message class="mt-4" :class="`is-${color}`">
-            <section class="hero is-small">
-                <div class="hero-head">
-                    <nav class="navbar">
-                        <div class="container">
-                            <div class="navbar-brand">
-                                <div class="navbar-item">
-                                    <p class="ml-3"><strong> {{ message }}</strong></p>
-                                </div>
-                            </div>
-                            <div class="navbar-menu">
-                                <div class="navbar-end">
-                                 <span class="navbar-item">
-                                     <a>
-                                        <i class="ml-3 fa-sharp fa-solid fa-circle-info"></i>
-                                     </a>
-                                 </span>
-                                </div>
-                            </div>
-                        </div>
-                        <i class="ml-3 fa-sharp fa-solid fa-circle-info"></i>
-                    </nav>
+        <b-collapse
+            :class="card ? 'card' : ''"
+            :open="false"
+            class="rounded"
+            animation="slide"
+            aria-id="contentIdForA11y3">
+            <template #trigger="props">
+                <div class="card-header py-3 px-2 rounded"
+                    role="button"
+                    aria-controls="contentIdForA11y3"
+                    :aria-expanded="props.open">
+                    <a class="card-header-icon p-1">
+                        <b-icon
+                            pack="fas"
+                            icon="fa-duotone fa-newspaper"
+                            size="is-large"
+                            :type="`is-${color}`">
+                        </b-icon>
+                    </a>
+                    <p class="card-header-title px-2">
+                        <strong>{{ message }}</strong>
+                    </p>
+                    <a class="card-header-icon px-2" v-if="score || text">
+                        <i :class="props.open ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'"></i>
+                    </a>
+                    <a class="card-header-icon px-2" @click="closeCallback">
+                        <i class="fa-sharp fa-solid fa-xmark"></i>
+                    </a>
                 </div>
-                <i class="ml-3 fa-sharp fa-solid fa-circle-info"></i>
-
-            </section>
-            <i class="ml-3 fa-sharp fa-solid fa-circle-info"></i>
-            <b-progress class="mt-2"
-                v-if="score !== undefined" show-value format="percent"
-                        size="is-small"
-                        :type="`is-${color}`" :value="80">
-            </b-progress>
-        </b-message>
-    </div>-->
+            </template>
+            <div :class="card ? 'card-content' : ''" v-if="score || text" class="rounded scrollable">
+                <div v-if="score" class="mb-5">
+                    <h1><strong>Score: {{ scorePercentage }} %</strong></h1>
+                    <b-progress v-if="score !== undefined" show-value format="percent"
+                                size="is-small"
+                                :type="`is-${color}`" :value="scorePercentage">
+                    </b-progress>
+                </div>
+                <div v-if="text">
+                    <h1><strong>Evaluated text</strong></h1>
+                    <div class="content">
+                        {{ text }}
+                    </div>
+                </div>
+            </div>
+        </b-collapse>
+    </div>
 </template>
 
 <script>
@@ -72,48 +57,59 @@
 export default {
     name: 'ModelResult',
     props: {
-        result: {
+        card: {
+            type: Boolean,
+            required: false,
+            default: true
+        },
+        label: {
             type: Number,
-            required: true,
+            required: false,
             default: undefined
         },
         score: {
             type: Number,
             required: false,
             default: undefined
+        },
+        text: {
+            type: String,
+            required: false,
+            default: undefined
+        },
+        closeCallback: {
+            type: Function,
+            required: false,
+            default: () => {
+            }
         }
     },
     data() {
-        return {}
+        return {
+            description: "",
+        }
     },
     computed: {
+        scorePercentage() {
+            return this.score * 100;
+        },
         message() {
-            return this.result === 1 ? "This news is a fact" : "This news is fake";
+            if (this.error) {
+                return this.error;
+            }
+            return this.label === 1 ? "This news is a fact" : "This news is fake";
         },
         color() {
-            return this.result === 1 ? "success" : "danger";
+            return this.label === 1 ? "success" : "danger";
         }
     },
     async created() {
-
+        //setTimeout(this.closeCallback, 5000);
     },
     methods: {}
 }
 </script>
 
 <style lang="scss" scoped>
-
-
-.result-container {
-    width: 400px;
-}
-
-hr.separator {
-    margin: 0;
-    border-top: 1px solid #bbb;
-}
-
-section.message-body {
-    padding: 16px 12px;
-}
+@import "../assets/common.scss";
 </style>

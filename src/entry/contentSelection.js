@@ -1,6 +1,6 @@
 import Vue from "vue";
 import shadow from 'vue-shadow-dom';
-import ContentView from "../view/content";
+import ContentView from "../view/contentSelection";
 import Buefy from "buefy";
 
 Vue.use(shadow);

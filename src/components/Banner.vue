@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import {openNewTabPage} from "@/utils/utils";
+import {openNewTabPage} from "@/utils/extensionUtils";
 
 export default {
     // eslint-disable-next-line vue/multi-word-component-names

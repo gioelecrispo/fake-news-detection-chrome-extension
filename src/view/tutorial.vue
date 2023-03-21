@@ -53,7 +53,7 @@
 
             <!-- HERO BODY -->
             <div class="hero-body">
-                <b-carousel :autoplay="false" class="has-text-centered container content">
+                <b-carousel :autoplay="false" :repeat="false" class="has-text-centered container content">
                     <b-carousel-item class="mb-6">
                         <div>
                             <h1 class="title">Check selected text</h1>
@@ -64,15 +64,15 @@
                                  src="/images/tutorial1.png"/>
                         </div>
                     </b-carousel-item>
-                    <!--<b-carousel-item class="mb-6">
+                    <b-carousel-item class="mb-6">
                         <div>
-                            <h1 class="title">dsadassdasd testo selezionato</h1>
-                            <p>Traduci il testo che hai selezionato cliccando sull'icona di DeepL o attivando una combinazione
-                                di tasti.</p>
+                            <h1 class="title has-text-success">Stay alerted, always.</h1>
+                            <p class="mb-0">You are alerted to on every page you visit. </p>
+                            <p class="mb-3">Automatically, the extension detects if the page you are reading is a news story and if it looks like fake news.</p>
                             <img class="is-inline-block content-container" alt="tutorial2"
-                                 src="/images/tutorial1.png"/>
+                                 src="/images/tutorial2.png"/>
                         </div>
-                    </b-carousel-item>-->
+                    </b-carousel-item>
                     <b-carousel-item class="mb-6">
                         <div>
                             <h1 class="title has-text-danger">Be aware!</h1>

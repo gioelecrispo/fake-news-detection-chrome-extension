@@ -1,0 +1,32 @@
+.fab-container {
+    z-index: 1;
+    height: 32px!important;
+    width: 32px!important;
+    background-color: #fff!important;
+    border-radius: 50%!important;
+    display: inline-block!important;
+    margin-left: 16px!important;
+    margin-top: -16px!important;
+    position: absolute!important;
+    box-shadow: 2px 2px 2px #aaaaaa!important;
+}
+.fab-content {
+    left: 8px;
+    height: 100% !important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+}
+
+.scrollable {
+    overflow-y: scroll;
+    max-height: 400px
+}
+.rounded {
+    border-radius: 20px!important;
+}
+
+.card-border {
+    border-left: 6px solid #2f2f2f;
+}
+

@@ -9,9 +9,15 @@
     "build-watch": "vue-cli-service  --env.NODE_ENV=development build-watch --mode development"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-brands-svg-icons": "^6.3.0",
+    "@fortawesome/free-regular-svg-icons": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@fortawesome/vue-fontawesome": "^2.0.10",
     "@tensorflow/tfjs": "^4.1.0",
     "buefy": "^0.9.22",
     "core-js": "^3.8.3",
+    "franc": "^6.1.0",
     "onnxruntime-node": "^1.14.0",
     "onnxruntime-web": "^1.14.0",
     "vue": "^2.6.14",

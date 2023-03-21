@@ -1,13 +1,16 @@
 /* eslint-disable */
-const {loadTokenizer} = require("./tokenizer");
-const ort = require('onnxruntime-web');
+//const {loadTokenizer} = require("./tokenizer");
+//const ort = require('onnxruntime-web');
+import * as tf from "@tensorflow/tfjs";
+import {loadTokenizer} from "./tokenizer.js";
+import * as ort from 'onnxruntime-web';
 const Tensor = ort.Tensor;
 
 
 ort.env.wasm.numThreads = 1;
 
 
-class BertClassifier {
+export default class BertClassifier {
     constructor(modelUrl,
                 vocabUrl,
                 maxSeqLength = 512,
@@ -31,7 +34,7 @@ class BertClassifier {
         this.onLoad();
     }
 
-    async predict(text, onStartPrediction = (text) => {}, onCompletePrediction = (prediction) => {}) {
+    async predict(text, onStartPrediction = (text) => {}, onCompletePrediction = (label, score) => {}) {
         if (this.modelSession == null) {
             await this.loadModel(this.onLoad);
         }
@@ -53,9 +56,15 @@ class BertClassifier {
         };
 
         const result = await this.modelSession.run(feeds, ["logits"]);
-        const prediction = this.indexOfMax(result.logits.data);
+        const label = this.indexOfMax(result.logits.data);
+        const score = tf.softmax(tf.tensor(Array.from(result.logits.data))).arraySync()[label];
+        const prediction = {
+            label: label,
+            score: score,
+        };
+        console.log("prediction", prediction);
         onCompletePrediction(prediction);
-        return prediction
+        return prediction;
     }
 
     indexOfMax(arr) {
@@ -82,5 +91,4 @@ class BertClassifier {
 }
 
 
-exports.BertClassifier = BertClassifier;
 

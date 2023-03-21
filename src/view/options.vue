@@ -1,28 +1,46 @@
 <template>
-  <div class="main_app">
-    <h1>Hello {{msg}}</h1>
-  </div>
+    <div class="mt-6 p-3 options">
+        <b-switch
+                  v-model="isAutomaticPageDetectionEnabled"
+        :input="changeValue('OPTIONS.isAutomaticPageDetectionEnabled', isAutomaticPageDetectionEnabled)">
+            <strong>Enable automatic page detection</strong></b-switch>
+    </div>
 </template>
 
 <script>
 export default {
-  name: 'optionsView',
-  data () {
-    return {
-      msg: 'options'
+    name: 'optionsView',
+    data() {
+        return {
+            isAutomaticPageDetectionEnabled: true
+        }
+    },
+    computed: {
+
+    },
+    async created() {
+        let key = 'OPTIONS.isAutomaticPageDetectionEnabled'
+        const data = await chrome.storage.sync.get(key);
+        if (data === undefined) {
+            await this.changeValue(key, true);
+        } else {
+            this.isAutomaticPageDetectionEnabled = data[key];
+        }
+    },
+    methods: {
+        async changeValue(key, value) {
+            let obj = {};
+            obj[key] = value;
+
+            await chrome.storage.sync.set(obj);
+        }
     }
-  }
+
 }
 
 </script>
 
-<style lang="css" scoped>
-.main_app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss" scoped>
+.options {
 }
 </style>
