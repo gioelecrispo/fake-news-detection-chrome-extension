@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="fab-container">
+        <div v-if="card" class="fab-container">
             <b-image class="is-16x16 fab-content" :src="require('@/assets/icons/logo-48x48.png')"></b-image>
         </div>
         <div :class="classValue" class="card-border rounded">

@@ -11,7 +11,7 @@
                                      :isModelPredicting="isModelPredicting"></ModelStatus>
                         <PredictionError :card="false"
                                          v-if="error" :error="error"
-                                         :closeCallback="() => { this.error=undefined }"></PredictionError>
+                                         :closeCallback="hideError"></PredictionError>
                         <div ref="resultContainer" v-show="error === undefined && label !== undefined && hasPredicted">
                             <ModelResult :card="false"
                                          :label="label" :score="score" :error="error"
@@ -66,6 +66,10 @@ export default {
             openNewTabPage("tutorial.html");
         },
         hideResult() {
+            this.hasPredicted = false;
+        },
+        hideError() {
+            this.error = undefined;
             this.hasPredicted = false;
         }
     }

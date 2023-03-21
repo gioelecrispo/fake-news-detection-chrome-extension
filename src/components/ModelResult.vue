@@ -22,10 +22,18 @@
                             :type="`is-${color}`">
                         </b-icon>
                     </a>
-                    <p class="card-header-title px-2">
-                        <strong>{{ message }}</strong>
-                    </p>
-                    <a class="card-header-icon px-2" v-if="score || text">
+                    <div  class="card-header-title px-2" >
+                        <div style="width: 100%;">
+                            <strong>{{ message }}</strong>
+                            <div v-if="score" class="my-2">
+                                <b-progress v-if="score !== undefined" show-value format="percent"
+                                            size="is-small"
+                                            :type="`is-${color}`" :value="scorePercentage">
+                                </b-progress>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="card-header-icon px-2" v-if="text">
                         <i :class="props.open ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down'"></i>
                     </a>
                     <a class="card-header-icon px-2" @click="closeCallback">
@@ -33,15 +41,8 @@
                     </a>
                 </div>
             </template>
-            <div :class="card ? 'card-content' : ''" v-if="score || text" class="rounded scrollable">
-                <div v-if="score" class="mb-5">
-                    <h1><strong>Score: {{ scorePercentage }} %</strong></h1>
-                    <b-progress v-if="score !== undefined" show-value format="percent"
-                                size="is-small"
-                                :type="`is-${color}`" :value="scorePercentage">
-                    </b-progress>
-                </div>
-                <div v-if="text">
+            <div :class="card ? 'card-content' : ''" v-if="text" class="rounded scrollable">
+                <div>
                     <h1><strong>Evaluated text</strong></h1>
                     <div class="content">
                         {{ text }}
