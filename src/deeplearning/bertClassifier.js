@@ -40,7 +40,7 @@ export default class BertClassifier {
         }
 
         onStartPrediction(text);
-        const data = this.tokenizer.encodeText(text);
+        const data = this.tokenizer.encodeText(text, 512);
         data.inputIds = data.inputIds.slice(0, this.maxSeqLength);
         data.inputMask = data.inputMask.slice(0, this.maxSeqLength);
         data.segmentIds = data.segmentIds.slice(0, this.maxSeqLength);

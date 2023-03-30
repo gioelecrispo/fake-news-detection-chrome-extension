@@ -8,7 +8,7 @@
                         <div class="navbar-brand">
                             <a class="navbar-item">
                                 <b-image src="logo.png"></b-image>
-                                <p class="ml-3 title">Fake News Detector</p>
+                                <b-image class="ml-3" src="/images/logo/logo-name-beta.png"></b-image>
                             </a>
                             <div class="navbar-burger" @click="showNav = !showNav" :class="{ 'is-active': showNav }">
                                 <span><b></b></span>
@@ -61,7 +61,7 @@
                             <p class="mb-3">The popup gives you other useful information, such as the objectivity of the
                                 text.</p>
                             <img class="is-inline-block content-container" alt="tutorial1"
-                                 src="/images/tutorial1.png"/>
+                                 src="/images/tutorial/tutorial1.png"/>
                         </div>
                     </b-carousel-item>
                     <b-carousel-item class="mb-6">
@@ -70,7 +70,7 @@
                             <p class="mb-0">You are alerted to on every page you visit. </p>
                             <p class="mb-3">Automatically, the extension detects if the page you are reading is a news story and if it looks like fake news.</p>
                             <img class="is-inline-block content-container" alt="tutorial2"
-                                 src="/images/tutorial2.png"/>
+                                 src="/images/tutorial/tutorial2.png"/>
                         </div>
                     </b-carousel-item>
                     <b-carousel-item class="mb-6">
@@ -80,7 +80,7 @@
                                 difficult task.</p>
                             <p class="mb-3">Make sure you always double-check the information you're reading!</p>
                             <img class="is-inline-block content-container" alt="tutorial3"
-                                 src="/images/tutorial3.png"/>
+                                 src="/images/tutorial/tutorial3.png"/>
                         </div>
                     </b-carousel-item>
                     <b-carousel-item class="mb-6">
@@ -89,8 +89,18 @@
                             <p class="mb-0">English is the most widespread language on the web.</p>
                             <p class="mb-3">We work hard to support more languages and make this tool more effective for
                                 everyone.</p>
-                            <img class="is-inline-block content-container" alt="tutorial3"
-                                 src="/images/tutorial4.png"/>
+                            <img class="is-inline-block content-container" alt="tutorial4"
+                                 src="/images/tutorial/tutorial4.png"/>
+                        </div>
+                    </b-carousel-item>
+                    <b-carousel-item class="mb-6">
+                        <div class="has-text-centered container content">
+                            <h1 class="title has-text-warning-dark">This is a Beta release.</h1>
+                            <p class="mb-0">There are some adjustments to be made to the graphics and the neural network.</p>
+                            <p class="mb-3">We are working hard to improve the product. Leave a comment <a
+                                href="https://gioelecrispo.github.io/fake-news-detection-chrome-extension/feedback">here</a> to contribute and help us. Thank you!</p>
+                            <img class="is-inline-block content-container" alt="tutorial5"
+                                 src="/images/tutorial/tutorial5.png"/>
                         </div>
                     </b-carousel-item>
                     <b-carousel-item>

@@ -1,18 +1,24 @@
 <template>
-    <section :class="card ? 'card' : ''">
-        <div v-if="isModelLoading" class="p-3">
-            <p class="subtitle mb-1">
-                Model is loading...
-            </p>
-            <b-progress type="is-primary"></b-progress>
+    <div>
+        <div v-if="card" class="fab-container">
+            <b-image class="is-16x16 fab-content" :src="require('@/assets/icons/logo-48x48.png')"></b-image>
         </div>
-        <div v-else-if="isModelPredicting" class="p-3">
-            <p class="subtitle mb-1">
-                Model is predicting...
-            </p>
-            <b-progress type="is-primary"></b-progress>
+        <div :class="card ? 'card' : ''" class="rounded py-3 px-2">
+            <!--<div v-if="isModelLoading" class="p-3">
+                <p class="subtitle mb-1">
+                    Model is predicting...
+                </p>
+                <b-progress type="is-primary"></b-progress>
+            </div>
+            <div v-else-if="isModelPredicting" class="p-3">-->
+            <div v-if="isModelLoading || isModelPredicting" class="p-3">
+                <p class="subtitle mb-1">
+                    Model is predicting...
+                </p>
+                <b-progress type="is-primary"></b-progress>
+            </div>
         </div>
-    </section>
+    </div>
 </template>
 
 <script>
@@ -51,5 +57,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+@import "../assets/common.scss";
 </style>

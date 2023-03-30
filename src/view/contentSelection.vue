@@ -1,20 +1,19 @@
 <template>
     <!--<shadow-root>-->
-        <div id="chrome-extension-content-app" class="bubble" ref="chromeExtensionSelectionContainer">
-            <ModelStatus v-if="isModelLoading || isModelPredicting"
-                         :isModelLoading="isModelLoading" :isModelPredicting="isModelPredicting"></ModelStatus>
-            <PredictionError v-if="error !== undefined" :error="error" :closeCallback="hideError"></PredictionError>
-            <div v-if="error === undefined && label !== undefined && hasPredicted">
-                <ModelResult :label="label" :score="score" :error="error"></ModelResult>
-            </div>
-            <div ref="buttonRequest" v-if="!isModelLoading && !isModelPredicting && !hasPredicted">
-                <b-tooltip type="is-dark" label="Check if this news is fake">
-                    <div class="card p-2" @click="predict">
-                        <b-image :src="require('@/assets/icons/logo-16x16.png')"></b-image>
-                    </div>
-                </b-tooltip>
-            </div>
+    <div id="chrome-extension-content-app" class="bubble" ref="chromeExtensionSelectionContainer">
+        <ModelStatus v-if="isModelLoading || isModelPredicting"
+                     :isModelLoading="isModelLoading" :isModelPredicting="isModelPredicting"></ModelStatus>
+        <PredictionError v-if="error !== undefined" :error="error" :closeCallback="hideError"></PredictionError>
+        <ModelResult :label="label" :score="score"
+                     v-if="error === undefined && label !== undefined && hasPredicted"></ModelResult>
+        <div ref="buttonRequest" v-if="!isModelLoading && !isModelPredicting && !hasPredicted">
+            <b-tooltip type="is-dark" label="Check if this news is fake">
+                <div class="card p-2" @click="predict">
+                    <b-image :src="require('@/assets/icons/logo-16x16.png')"></b-image>
+                </div>
+            </b-tooltip>
         </div>
+    </div>
     <!--</shadow-root>-->
 </template>
 
@@ -34,8 +33,7 @@ export default {
         PredictionError
     },
     data() {
-        return {
-        }
+        return {}
     },
     async mounted() {
         const _this = this;
@@ -102,8 +100,8 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    min-width: 350px!important;
-    max-width: 500px!important;
+    min-width: 350px !important;
+    max-width: 500px !important;
 }
 
 </style>

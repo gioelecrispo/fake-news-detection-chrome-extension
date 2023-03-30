@@ -15,25 +15,29 @@ export default {
         }
     },
     methods: {
-        predict() {
+        predict(isBackground=false) {
             this.error = undefined;
             this.label = undefined;
             this.score = undefined;
             if (this.textToCheck.length < 200) {
-                this.error = {
-                    type: "warning",
-                    message: "The text to be checked is too short. Please enlarge the text to get a more reliable prediction."
-                };
-                this.hasPredicted = true;
-            } else {
-                const lang = franc(this.textToCheck);
-                console.log("LANGUAGE", lang)
-                if (lang !== 'eng') {
+                if (!isBackground) {
                     this.error = {
                         type: "warning",
-                        message: "The text is not in English. The Chrome extension Fake News Detection only supports English for the moment."
-                    }
+                        message: "The text to be checked is too short. Please enlarge the text to get a more reliable prediction."
+                    };
                     this.hasPredicted = true;
+                }
+            } else {
+                const lang = franc(this.textToCheck);
+                //console.log("LANGUAGE", lang)
+                if (lang !== 'eng') {
+                    if (!isBackground) {
+                        this.error = {
+                            type: "warning",
+                            message: "The text is not in English. The Chrome extension Fake News Detection only supports English for the moment."
+                        }
+                        this.hasPredicted = true;
+                    }
                 } else {
                     let _this = this;
                     let port = chrome.runtime.connect({name: "MODEL.connection"});

@@ -7,7 +7,8 @@
                     <div class="navbar-brand">
                         <div class="navbar-item">
                             <b-image src="logo.png"></b-image>
-                            <p class="ml-3 subtitle"><strong>Fake News Detector</strong></p>
+                            <b-image class="ml-3" src="/images/logo/logo-name-beta.png"></b-image>
+                            <!--<p class="ml-3 subtitle"><strong>Fake News Detector</strong></p>-->
                         </div>
                     </div>
                     <div class="navbar-end is-hidden-touch">

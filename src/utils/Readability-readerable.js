@@ -53,7 +53,7 @@ function isProbablyReaderable(doc, options = {}) {
 
   var defaultOptions = { minScore: 20, minContentLength: 140, visibilityChecker: isNodeVisible };
   options = Object.assign(defaultOptions, options);
-
+  console.log("options", options)
   var nodes = doc.querySelectorAll("p, pre, article");
 
   // Get <div> nodes which have <br> node(s) and append them into the `nodes` variable.
@@ -97,6 +97,7 @@ function isProbablyReaderable(doc, options = {}) {
 
     score += Math.sqrt(textContentLength - options.minContentLength);
 
+    console.log("score", score)
     if (score > options.minScore) {
       return true;
     }
